@@ -1,3 +1,4 @@
+// tree_path.cpp - インデックスリストを用いて木構造を歩き回る
 #include <vector>
 #include <memory>
 #include <cassert>
@@ -29,7 +30,7 @@ void print_index_list(const index_list_t& indeces)
 treeptr_t resolve_index_list(treeptr_t root, const index_list_t& indices) {
     treeptr_t node = root;
     for (size_t idx : indices) {
-        if (idx >= node->size()) {
+        if (!node || idx >= node->size()) {
             return nullptr;
         }
         node = (*node)[idx];
@@ -39,6 +40,10 @@ treeptr_t resolve_index_list(treeptr_t root, const index_list_t& indices) {
 
 // 次のインデックスリストを計算
 index_list_t next_index_list(treeptr_t root, index_list_t indices) {
+    if (!root) {
+        return {}; // ルートが無効の場合
+    }
+
     if (indices.empty()) {
         return {0}; // 最初の要素を指す
     }
@@ -66,9 +71,10 @@ index_list_t next_index_list(treeptr_t root, index_list_t indices) {
         }
     }
 
-    return {}; // 最後の要素に到達した場合
+    return indices; // 最後の要素に到達した場合、空を返す
 }
 
+// メイン関数
 int main(int argc, char **argv) {
     // ツリー構造を構築
     auto root = std::make_shared<tree_t>();
@@ -88,50 +94,11 @@ int main(int argc, char **argv) {
     index_list_t path = {};
     auto result = next_index_list(root, path);
     print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
-    result = next_index_list(root, result);
-    print_index_list(result);
+    for (int i = 0; i < 20; ++i)
+    {
+        result = next_index_list(root, result);
+        print_index_list(result);
+    }
 
     return 0;
 }
