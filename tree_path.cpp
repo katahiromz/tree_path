@@ -44,7 +44,7 @@ index_list_t next_index_list(treeptr_t root, index_list_t indices) {
         return {}; // ルートが無効の場合
     }
 
-    if (indices.empty()) {
+    if (indices.empty() && root->size() > 0) {
         return {0}; // 最初の要素を指す
     }
 
@@ -54,9 +54,8 @@ index_list_t next_index_list(treeptr_t root, index_list_t indices) {
     }
 
     if (node->size() > 0) {
-        // 現在のノードに子ノードが存在する場合
         indices.push_back(0);
-        return indices;
+        return indices; // 現在のノードに子ノードが存在する場合
     }
 
     // 子ノードが存在しない場合、親に戻って次の兄弟ノードを指す
