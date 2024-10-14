@@ -16,8 +16,7 @@ typedef std::vector<size_t> index_list_t;
 void print_index_list(const index_list_t& indeces)
 {
     printf("{ ");
-    for (size_t i = 0; i < indeces.size(); ++i)
-    {
+    for (size_t i = 0; i < indeces.size(); ++i) {
         if (i == 0)
             printf("%d", (int)indeces[i]);
         else
