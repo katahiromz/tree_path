@@ -93,8 +93,7 @@ int main(int argc, char **argv) {
     index_list_t path = {};
     auto result = next_index_list(root, path);
     print_index_list(result);
-    for (int i = 0; i < 20; ++i)
-    {
+    for (int i = 0; i < 20; ++i) {
         result = next_index_list(root, result);
         print_index_list(result);
     }
